@@ -6,6 +6,8 @@
 //reset to move all the values to original, to move everything back to original position
 // --and to correct all the display values.
 //get divs that are in enemies, once clicked to be fought, not selected as a character.
+//make a play again button that just reloads the page!!!
+//change innerHTML to show 'select an opponent', but only when you have no current opponent.
 
 
 //set each character and their stats to objects
@@ -37,9 +39,6 @@ let yoda = {
 }
 
 //define functions
-function reset() {
-    //reset values
-}
 
 function displayValue() {
     $('#grievous-health').text(grievous.health);
@@ -55,7 +54,12 @@ displayValue();
 $('.character').on('click', function(){
     let moveAllDiv = $('.character').detach('#select-character')
     moveAllDiv.appendTo('#enemies')
+    $('.character').addClass('enemy')
+    $('.character').removeClass('character')
     let moveDiv = $(this).detach('#enemies');
     moveDiv.appendTo('#your-character')
+    $(this).removeClass('enemy')
+    $(this).addClass('hero')
+   
     
 })

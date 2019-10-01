@@ -1,3 +1,6 @@
+/* To Do: */
+/* styles for the divs in the different containers. */
+
 body {
     background-image: url(../images/star-wars-rise-of-skywalker.jpg);
     background-repeat: no-repeat;
@@ -48,5 +51,23 @@ img {
     margin: 5px;
     /*border: 1px solid white; for testing / formating*/    
     padding: 5px;
+
+}
+
+.enemy {
+    /* background-image: url(../images/red-lightning.jpg);
+    background-size: 100%; */
+    display: inline-block;
+    margin: 5px;
+    padding: 5px; 
+
+}
+
+.hero {
+    /* background-image: url();
+    background-size: 100%; */
+    display: inline-block;
+    margin: 5px;
+    padding: 5px; 
 
 }
