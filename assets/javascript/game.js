@@ -1,17 +1,18 @@
 //To Do:
-//to move .detach(location).append(location)
-
-
-
+//to move .detach(location).append(location).
+//set javascript to load after html and css.
+//display none- other elements, until characters are selected.
+//once characters are selected, selection div is display none.
+//reset to move all the values to original, to move everything back to original position
+// --and to correct all the display values.
+//get divs that are in enemies, once clicked to be fought, not selected as a character.
 
 
 //set each character and their stats to objects
-
 let grievous = {
     health: 250,
     attack: 20,
     counterAttack: 25,
-
 }
 
 let windu = {
@@ -36,6 +37,10 @@ let yoda = {
 }
 
 //define functions
+function reset() {
+    //reset values
+}
+
 function displayValue() {
     $('#grievous-health').text(grievous.health);
     $('#windu-health').text(windu.health);
@@ -45,3 +50,12 @@ function displayValue() {
 
 //Start Game
 displayValue();
+
+//when a character is selected, it moves to the 'your character div'
+$('.character').on('click', function(){
+    let moveAllDiv = $('.character').detach('#select-character')
+    moveAllDiv.appendTo('#enemies')
+    let moveDiv = $(this).detach('#enemies');
+    moveDiv.appendTo('#your-character')
+    
+})

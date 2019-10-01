@@ -46,5 +46,7 @@ img {
 .character {
     display: inline-block;
     margin: 5px;
+    /*border: 1px solid white; for testing / formating*/    
+    padding: 5px;
 
 }
