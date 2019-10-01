@@ -24,9 +24,27 @@ h3 {
 button {
     padding: 20px;
     background-color: black;
-    display: flex;
-    justify-content: center;
-    color:white;
-    
+    color: white;
+
+}
+
+#fight-section,
+#defender,
+#enemies,
+#select-character,
+#your-character {
+    text-align: center;
+
+}
+
+img {
+    height: 100px;
+    margin: 5px;
+
+}
+
+.character {
+    display: inline-block;
+    margin: 5px;
 
 }
