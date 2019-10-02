@@ -1,13 +1,9 @@
 //To Do:
-//to move .detach(location).append(location).
-//set javascript to load after html and css.
+//
 //display none- other elements, until characters are selected.
-//once characters are selected, selection div is display none.
-//reset to move all the values to original, to move everything back to original position
-// --and to correct all the display values.
-//get divs that are in enemies, once clicked to be fought, not selected as a character.
 //make a play again button that just reloads the page!!!
 //change innerHTML to show 'select an opponent', but only when you have no current opponent.
+//when they are defeated, display none and clear the div so i can move next enemy to div.
 
 //loads js after html and css
 $(document).ready( function() {
@@ -62,6 +58,7 @@ $(document).ready( function() {
         moveAllDiv.appendTo('#enemies');
         $('.character').addClass('enemy');
         $('.character').removeClass('character');
+        $('#select-character').css('display','none');
 
     })
 
