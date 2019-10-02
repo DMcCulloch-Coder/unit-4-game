@@ -53,7 +53,7 @@ $(document).ready( function() {
     displayValue();
 
     //when a character is selected, it moves to the 'your character div'
-    $('.character').on('click', function(){
+    $(document).on('click', '.character', function(event){
         let moveDiv = $(this).detach('#enemies');
         moveDiv.appendTo('#your-character');
         $(this).removeClass('character');
@@ -66,12 +66,14 @@ $(document).ready( function() {
     })
 
     //Once an enemy, make it a defender to fight.
-    //add an if statnement that this only happens if there is no defender, also change so can't be changed out of defender div
-    $('.enemy').on('click', function() {
-        let moveDiv = $(this).detach('#enemies');
-        moveDiv.appendTo('#defender');
-        $(this).addClass('fight')
-
+    $(document).on('click', '.enemy', function() {
+        if($('#defender').children('div').length == 0) {
+            let moveDiv = $(this).detach('#enemies');
+            moveDiv.appendTo('#defender');
+            $(this).addClass('fight')
+        } else {
+            alert('Already in a fight!')
+        }
     })
 
 });
