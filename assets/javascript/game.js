@@ -18,7 +18,7 @@ $(document).ready( function() {
 
     let windu = {
         health: 250,
-        attack: 20,
+        attack: 20, 
         counterAttack: 25,
         
     }
@@ -57,10 +57,7 @@ $(document).ready( function() {
         for (let i=0; i < characterArray.length; i++) {
             for(let j=0; j < properties.length; j++) {
                 //Someone fixed they syntax of my template literals on stack overflow.  User: Ghassen Louhaichi
-                $(`#${characterArray[i]}`).attr(
-                    `data-${properties[j]}`,
-                    `${characterArray[i]}.${properties[j]}`
-                );           
+                $(`#${characterArray[i]}`).attr(`data-${properties[j]}`, `${characterArray[i]}.${properties[j]}`);           
                 
             }
             
@@ -68,12 +65,46 @@ $(document).ready( function() {
         
     }
 
-    //fight the characters
+    function checkDefeats () {
+        //check if the enemy is dead (defeat) - need to code
+        if (enemyHealth <= 0) {
+            $('#defender').detach('.fight'); //need to test
+            //check if all enemies are dead (win) - need to code
+        } else if ($('#defender').children('div').length == 0 &&
+            $('#enemies').children('div').length == 0) {
+            //you win sequence!!!!!!
+            alert('you win') //code
+            reset();
+        }
+    }
+
+    function loseCheck () {
+        //check if hero is dead (lose) - need to code
+        if (heroHealth <= 0) {
+            //you lose sequence
+            alert('you lose') //code
+            reset();
+        }
+    }
+
+    //reset values
+    function reset (){
+        alert(reset); //need to code 
+    }
+
+    //fight the characters - only runs if there is an enemy in the current opponent section
     function fight() {
         heroHealth += $('.hero').attr('data-health');
         heroAttack += $('.hero').attr('data-attack');
         let enemyHealth = $('.fight').attr('data-health');
         let enemyAttack = $('.fight').attr('data-counterAttack')
+
+        enemyHealth -= heroAttack;
+        heroAttack = heroAttack + heroAttack;
+        checkDefeats();
+        heroHealth -= enemyAttack;
+        loseCheck();
+        displayValue();
         
         console.log (heroHealth) //test
         console.log (heroAttack) //test
