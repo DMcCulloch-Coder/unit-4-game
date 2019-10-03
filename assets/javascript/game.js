@@ -40,6 +40,9 @@ $(document).ready( function() {
     //define functions
     let characterArray = ['grievous', 'windu', 'dooku', 'yoda']
     let properties = ['health', 'attack', 'counterAttack']
+    //must give hero Attack and Health a global scope to sustain it through each attacking sequence
+    let heroHealth = 0;
+    let heroAttack = 0;
 
     function displayValue() {
         $('#grievous-health').text(grievous.health);
@@ -50,16 +53,32 @@ $(document).ready( function() {
     }
 
     //function to assign object as data to character divs
-    //$('#grievous').attr('data-health', grievous.health)
     function data() {
         for (let i=0; i < characterArray.length; i++) {
             for(let j=0; j < properties.length; j++) {
-                `$('#${characterArray[i]}').attr('data-${properties[j]}', ${characterArray[i]}.${properties[j]})`;
-                console.log('running')
+                //Someone fixed they syntax of my template literals on stack overflow.  User: Ghassen Louhaichi
+                $(`#${characterArray[i]}`).attr(
+                    `data-${properties[j]}`,
+                    `${characterArray[i]}.${properties[j]}`
+                );           
+                
             }
-            console.log('still running')
+            
         }
         
+    }
+
+    //fight the characters
+    function fight() {
+        heroHealth += $('.hero').attr('data-health');
+        heroAttack += $('.hero').attr('data-attack');
+        let enemyHealth = $('.fight').attr('data-health');
+        let enemyAttack = $('.fight').attr('data-counterAttack')
+        
+        console.log (heroHealth) //test
+        console.log (heroAttack) //test
+        console.log (enemyHealth) //test
+        console.log (enemyAttack) //test
     }
 
     //Start Game
@@ -89,8 +108,17 @@ $(document).ready( function() {
         } else {
             alert('Already in a fight!')
         }
+        
     })
 
+    //On click to have the fight start
+    $('button').on('click', function () {
+        if($('#defender').children('div').length == 0) {
+            alert('No one to fight yet!')
+        } else {
+            fight();
+        }
+    });
 
 
 });
