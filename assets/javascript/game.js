@@ -46,6 +46,7 @@ $(document).ready( function() {
     let enemyHealth;
     let enemyAttack;
 
+    //not working until I can fix the fightSetup() function
     function displayValue() {
         $('#grievous-health').text(grievous.health);
         $('#windu-health').text(windu.health);
@@ -70,14 +71,20 @@ $(document).ready( function() {
     function checkDefeats () {
         //check if the enemy is dead (defeat) - need to code
         if (enemyHealth <= 0) {
-            $('#defender').detach('.fight'); //need to test
+            $('.fight').detach('div'); //need to fix
+            $('#select-character').append('.fight') //test
             alert('defeated him') //test
+
             //check if all enemies are dead (win) - need to code
-        } else if ($('#defender').children('div').length == 0 &&
-            $('#enemies').children('div').length == 0) {
-            //you win sequence!!!!!!
-            alert('you win') //code
-            reset();
+            if ($('#defender').children('div').length == 0 &&
+                $('#enemies').children('div').length == 0) {
+
+                //you win sequence!!!!!!
+                alert('you win') //code
+                reset();
+            }
+        } else {
+            return;
         }
     }
 
@@ -92,7 +99,7 @@ $(document).ready( function() {
 
     //reset values
     function reset (){
-        alert(reset); //need to code 
+        alert('reset'); //need to code 
     }
 
     function fightSetUp(){
