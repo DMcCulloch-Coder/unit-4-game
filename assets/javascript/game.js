@@ -43,6 +43,8 @@ $(document).ready( function() {
     //must give hero Attack and Health a global scope to sustain it through each attacking sequence
     let heroHealth = 0;
     let heroAttack = 0;
+    let enemyHealth;
+    let enemyAttack;
 
     function displayValue() {
         $('#grievous-health').text(grievous.health);
@@ -69,6 +71,7 @@ $(document).ready( function() {
         //check if the enemy is dead (defeat) - need to code
         if (enemyHealth <= 0) {
             $('#defender').detach('.fight'); //need to test
+            alert('defeated him') //test
             //check if all enemies are dead (win) - need to code
         } else if ($('#defender').children('div').length == 0 &&
             $('#enemies').children('div').length == 0) {
@@ -92,24 +95,32 @@ $(document).ready( function() {
         alert(reset); //need to code 
     }
 
+    function fightSetUp(){
+        // heroHealth = $('.hero').attr('data-health');
+        // heroAttack += $('.hero').attr('data-attack'); NEED TO DEBUG
+        // let enemyHealth = $('.fight').attr('data-health');
+        // let enemyAttack = $('.fight').attr('data-counterAttack');
+        
+        heroHealth = 250; //test
+        heroAttack = 5; //test
+        enemyHealth = 250; //test
+        enemyAttack = 15; //test
+    }
+
     //fight the characters - only runs if there is an enemy in the current opponent section
     function fight() {
-        heroHealth += $('.hero').attr('data-health');
-        heroAttack += $('.hero').attr('data-attack');
-        let enemyHealth = $('.fight').attr('data-health');
-        let enemyAttack = $('.fight').attr('data-counterAttack')
 
-        enemyHealth -= heroAttack;
+        enemyHealth = enemyHealth - heroAttack;
         heroAttack = heroAttack + heroAttack;
         checkDefeats();
-        heroHealth -= enemyAttack;
+        heroHealth = heroHealth - enemyAttack;
         loseCheck();
         displayValue();
         
-        console.log (heroHealth) //test
-        console.log (heroAttack) //test
-        console.log (enemyHealth) //test
-        console.log (enemyAttack) //test
+        console.log ('hero health: ' + heroHealth) //test
+        console.log ('hero attack: ' + heroAttack) //test
+        console.log ('enemy health: ' + enemyHealth) //test
+        console.log ('enemy attack: ' + enemyAttack) //test
     }
 
     //Start Game
@@ -136,6 +147,9 @@ $(document).ready( function() {
             let moveDiv = $(this).detach('#enemies');
             moveDiv.appendTo('#defender');
             $(this).addClass('fight')
+            //sets up the fight stats
+            fightSetUp();
+
         } else {
             alert('Already in a fight!')
         }
