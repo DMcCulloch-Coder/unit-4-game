@@ -4,17 +4,19 @@
 
 //BUG - need to not lose health if your opponent is defeated by your attack
 //Fix - balance so any charaacter can win or lose, but each are different
-//Fix - REset and win / lose counter / display
 
-//loads js after html and css
+//css background for characters in different areas!!!
+
+//fix how defeated characters are handled so that I can reset and stats are displayed properly
+
 $(document).ready( function() {
 
     //set each character and their stats to objects in an object
     let characters = {
-        "grievous": {health: 200, attack: 11, counterAttack: 10},
-        "windu": {health: 220, attack: 12, counterAttack: 10},
-        "dooku": {health: 240, attack: 15, counterAttack: 20},
-        "yoda": {health: 260, attack: 15, counterAttack: 25},
+        "grievous": {health: 100, attack: 11, counterAttack: 9},
+        "windu": {health: 120, attack: 12, counterAttack: 10},
+        "dooku": {health: 150, attack: 15, counterAttack: 20},
+        "yoda": {health: 180, attack: 16, counterAttack: 25},
     
     }
    
@@ -45,19 +47,31 @@ $(document).ready( function() {
 
     }
 
+    //reset values
+    function reset (){
+        initialDisplayValue();
+        $('#select-character').css('display','block')
+        $('#hero-attack').text('');
+        $('#enemy-attack').text('');
+        alert('reset');
+    }
+
     function checkDefeats () {
         //check if the enemy is dead (defeat)
         if (enemyHealth <= 0) {
+            
+            $('#hero-attack').text('You have defeated ' + $('.fight').attr('name') + '!  Select another enemy!'); //fix says undefined!!!!!!
+            $('#enemy-attack').text('');
             $('.fight').detach('div');
             $('#select-character').append('.fight')
-            alert('defeated him') //fix - individual enemy defeat sequence
+            
 
             //check if all enemies are dead (win)
             if ($('#defender').children('div').length == 0 &&
                 $('#enemies').children('div').length == 0) {
 
                 //you win sequence!!!!!!
-                alert('you win') //fix - win sequecne
+                alert('You Win! Way to Go!')
                 wins++;
                 reset();
             }
@@ -71,19 +85,12 @@ $(document).ready( function() {
         //check if hero is dead (lose) - need to code
         if (heroHealth <= 0) {
             //you lose sequence
-            alert('you lose') //fix - lose sequence
+            alert('You Lose! Try again next Time!')
             loses++;
             reset();
         }
     }
 
-    //reset values
-    function reset (){
-        initialDisplayValue();
-        alert('reset');
-    }
-
-    
     //call id from divs and figure out their health
     function heroSetUp(){
         heroHealth = characters[$('.hero').attr('id')].health
@@ -108,12 +115,6 @@ $(document).ready( function() {
         loseCheck();
         displayValue();
 
-        //add / fix - display fight stats in html under defender div!!!!!!!!!!!!!!!!!!!!!!!
-        
-        console.log ('hero health: ' + heroHealth) //test
-        console.log ('hero attack: ' + heroAttack) //test
-        console.log ('enemy health: ' + enemyHealth) //test
-        console.log ('enemy attack: ' + enemyAttack) //test
     }
 
     //Start Game
@@ -155,6 +156,10 @@ $(document).ready( function() {
             alert('No one to fight yet!')
         } else {
             fight();
+            if($('#defender').children('div').length !== 0) {
+                $('#hero-attack').text('You attacked ' + $('.fight').attr('name') + ' for ' + heroAttack + ' damage!');
+                $('#enemy-attack').text($('.fight').attr('name') + ' attacked you for ' + enemyAttack + ' damage!');
+            } 
         }
     });
 

@@ -35,7 +35,8 @@ button {
 #defender,
 #enemies,
 #select-character,
-#your-character {
+#your-character,
+#fight-ticker {
     text-align: center;
 
 }
