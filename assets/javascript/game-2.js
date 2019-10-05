@@ -10,61 +10,28 @@
 $(document).ready( function() {
 
     //set each character and their stats to objects
-    let grievous = {
-        health: 180,
-        attack: 4,
-        counterAttack: 5,
-        
+    let characters = {
+        "grievous": {health: 180, attack: 4, counterAttack: 5},
+        "windu": {health: 200, attack: 8, counterAttack: 10},
+        "dooku": {health: 220, attack: 12, counterAttack: 20},
+        "yoda": {health: 250, attack: 20, counterAttack: 25},
+    
     }
-
-    let windu = {
-        health: 200,
-        attack: 8, 
-        counterAttack: 10,
-        
-    }
-
-    let dooku = {
-        health: 220,
-        attack: 12,
-        counterAttack: 20,
-        
-    }
-
-    let yoda = {
-        health: 250,
-        attack: 20,
-        counterAttack: 25,
-        
-    }
-
+   
     //define functions
-    let characterArray = ['grievous', 'windu', 'dooku', 'yoda']
-    let properties = ['health', 'attack', 'counterAttack']
+    //let characterArray = ['grievous', 'windu', 'dooku', 'yoda'] //need?
+    //let properties = ['health', 'attack', 'counterAttack'] //need?
     let heroHealth = 0;
     let heroAttack = 0;
     let enemyHealth;
     let enemyAttack;
-
+    
     //not working until I can fix the fightSetup() function
     function displayValue() {
-        $('#grievous-health').text(grievous.health);
-        $('#windu-health').text(windu.health);
-        $('#dooku-health').text(dooku.health);
-        $('#yoda-health').text(yoda.health);
-        
-    }
-
-    //function to assign object as data to character divs
-    function data() {
-        for (let i=0; i < characterArray.length; i++) {
-            for(let j=0; j < properties.length; j++) {
-                //Someone fixed they syntax of my template literals on stack overflow.  User: Ghassen Louhaichi
-                $(`#${characterArray[i]}`).attr(`data-${properties[j]}`, `${characterArray[i]}.${properties[j]}`);           
-                
-            }
-            
-        }
+        $('#grievous-health').text(characters['grievous'].health);
+        $('#windu-health').text(characters['windu'].health);
+        $('#dooku-health').text(characters['dooku'].health);
+        $('#yoda-health').text(characters['yoda'].health);
         
     }
 
@@ -102,16 +69,22 @@ $(document).ready( function() {
         alert('reset'); //need to code 
     }
 
+    //---------------------------------------------------------------------------------------------------------
+    //call id from divs and figure out their health
     function fightSetUp(){
-        // heroHealth = $('.hero').attr('data-health');
-        // heroAttack += $('.hero').attr('data-attack'); //NEED TO DEBUG
-        // enemyHealth = $('.fight').attr('data-health');
-        // enemyAttack = $('.fight').attr('data-counterAttack');
-        
-        heroHealth = 250; //test
-        heroAttack = 5; //test
-        enemyHealth = 250; //test
-        enemyAttack = 15; //test
+        heroHealth = characters[$('.hero').attr('id')].health
+        heroAttack += characters[$('.hero').attr('id')].health
+        enemyHealth =//$('.fight').attr('data-health');
+        enemyAttack = //$('.fight').attr('data-counterAttack');
+
+        // heroHealth = //$('.hero').attr('data-health');
+        // heroAttack += //$('.hero').attr('data-attack'); //NEED TO DEBUG
+        // enemyHealth =//$('.fight').attr('data-health');
+        // enemyAttack = //$('.fight').attr('data-counterAttack');
+        //heroHealth = 250; //test
+        // heroAttack = 5; //test
+        // enemyHealth = 250; //test
+        // enemyAttack = 15; //test
 
     }
 
@@ -135,7 +108,7 @@ $(document).ready( function() {
 
     //Start Game
     displayValue();
-    data();
+    //data();
 
     //when a character is selected, it moves to the 'your character div'
     $(document).on('click', '.character', function(event){
