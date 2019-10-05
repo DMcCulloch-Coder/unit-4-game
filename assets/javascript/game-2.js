@@ -1,28 +1,24 @@
 //To Do:
-//.detach() the fight div once they are defeated!!!!!!!!!
 //display none- other elements, until characters are selected.
-//make a play again button that just reloads the page!!!
 //change innerHTML to show 'select an opponent', but only when you have no current opponent.
-//when they are defeated, display none and clear the div so i can move next enemy to div.
-//add win tracker - add stats and win++ to win function [same with loses?]
 
-//BUG - resetting health
+//BUG - need to not lose health if your opponent is defeated by your attack
+//Fix - balance so any charaacter can win or lose, but each are different
+//Fix - REset and win / lose counter / display
 
 //loads js after html and css
 $(document).ready( function() {
 
     //set each character and their stats to objects
     let characters = {
-        "grievous": {health: 180, attack: 2, counterAttack: 5},
-        "windu": {health: 200, attack: 4, counterAttack: 10},
-        "dooku": {health: 220, attack: 6, counterAttack: 20},
-        "yoda": {health: 250, attack: 10, counterAttack: 25},
+        "grievous": {health: 200, attack: 11, counterAttack: 10},
+        "windu": {health: 220, attack: 12, counterAttack: 10},
+        "dooku": {health: 240, attack: 15, counterAttack: 20},
+        "yoda": {health: 260, attack: 15, counterAttack: 25},
     
     }
    
     //define functions
-    //let characterArray = ['grievous', 'windu', 'dooku', 'yoda'] //need?
-    //let properties = ['health', 'attack', 'counterAttack'] //need?
     let heroHealth = 0;
     let heroAttack = 0;
     let enemyHealth;
@@ -46,20 +42,21 @@ $(document).ready( function() {
     }
 
     function checkDefeats () {
-        //check if the enemy is dead (defeat) - need to code
+        //check if the enemy is dead (defeat)
         if (enemyHealth <= 0) {
-            $('.fight').detach('div'); //need to fix
-            $('#select-character').append('.fight') //test
-            alert('defeated him') //test
+            $('.fight').detach('div');
+            $('#select-character').append('.fight')
+            alert('defeated him') //fix - individual enemy defeat sequence
 
-            //check if all enemies are dead (win) - need to code
+            //check if all enemies are dead (win)
             if ($('#defender').children('div').length == 0 &&
                 $('#enemies').children('div').length == 0) {
 
                 //you win sequence!!!!!!
-                alert('you win') //code
+                alert('you win') //fix - win sequecne
                 reset();
             }
+
         } else {
             return;
         }
@@ -69,7 +66,7 @@ $(document).ready( function() {
         //check if hero is dead (lose) - need to code
         if (heroHealth <= 0) {
             //you lose sequence
-            alert('you lose') //code
+            alert('you lose') //fix - lose sequence
             reset();
         }
     }
@@ -88,6 +85,7 @@ $(document).ready( function() {
 
     }
 
+    //can id from dive of whoever was just put into defender div
     function fightSetUp(){
         enemyHealth = characters[$('.fight').attr('id')].health
         enemyAttack = characters[$('.fight').attr('id')].counterAttack
@@ -104,7 +102,7 @@ $(document).ready( function() {
         loseCheck();
         displayValue();
 
-        //display fight stats in html under defender div!
+        //add / fix - display fight stats in html under defender div!!!!!!!!!!!!!!!!!!!!!!!
         
         console.log ('hero health: ' + heroHealth) //test
         console.log ('hero attack: ' + heroAttack) //test
@@ -156,6 +154,3 @@ $(document).ready( function() {
 
 
 });
-
-//create a function that fights, the var you add to the () is to grab the id from the fight div so you can connect it to an object.
-//figure out how to do this.
