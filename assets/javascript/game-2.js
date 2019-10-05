@@ -6,15 +6,17 @@
 //when they are defeated, display none and clear the div so i can move next enemy to div.
 //add win tracker - add stats and win++ to win function [same with loses?]
 
+//BUG - resetting health
+
 //loads js after html and css
 $(document).ready( function() {
 
     //set each character and their stats to objects
     let characters = {
-        "grievous": {health: 180, attack: 4, counterAttack: 5},
-        "windu": {health: 200, attack: 8, counterAttack: 10},
-        "dooku": {health: 220, attack: 12, counterAttack: 20},
-        "yoda": {health: 250, attack: 20, counterAttack: 25},
+        "grievous": {health: 180, attack: 2, counterAttack: 5},
+        "windu": {health: 200, attack: 4, counterAttack: 10},
+        "dooku": {health: 220, attack: 6, counterAttack: 20},
+        "yoda": {health: 250, attack: 10, counterAttack: 25},
     
     }
    
@@ -27,12 +29,20 @@ $(document).ready( function() {
     let enemyAttack;
     
     //not working until I can fix the fightSetup() function
-    function displayValue() {
+    function initialDisplayValue() {
         $('#grievous-health').text(characters['grievous'].health);
         $('#windu-health').text(characters['windu'].health);
         $('#dooku-health').text(characters['dooku'].health);
         $('#yoda-health').text(characters['yoda'].health);
         
+    }
+
+    //dynamically change health during fight
+    function displayValue () {
+        $('#your-character span').text(heroHealth)
+        $('#defender span').text(enemyHealth)
+        console.log('running')
+
     }
 
     function checkDefeats () {
@@ -66,25 +76,21 @@ $(document).ready( function() {
 
     //reset values
     function reset (){
-        alert('reset'); //need to code 
+        initialDisplayValue();
+        alert('reset')
     }
 
-    //---------------------------------------------------------------------------------------------------------
+    
     //call id from divs and figure out their health
-    function fightSetUp(){
+    function heroSetUp(){
         heroHealth = characters[$('.hero').attr('id')].health
-        heroAttack += characters[$('.hero').attr('id')].health
-        enemyHealth =//$('.fight').attr('data-health');
-        enemyAttack = //$('.fight').attr('data-counterAttack');
+        heroAttack = characters[$('.hero').attr('id')].attack
 
-        // heroHealth = //$('.hero').attr('data-health');
-        // heroAttack += //$('.hero').attr('data-attack'); //NEED TO DEBUG
-        // enemyHealth =//$('.fight').attr('data-health');
-        // enemyAttack = //$('.fight').attr('data-counterAttack');
-        //heroHealth = 250; //test
-        // heroAttack = 5; //test
-        // enemyHealth = 250; //test
-        // enemyAttack = 15; //test
+    }
+
+    function fightSetUp(){
+        enemyHealth = characters[$('.fight').attr('id')].health
+        enemyAttack = characters[$('.fight').attr('id')].counterAttack
 
     }
 
@@ -92,7 +98,7 @@ $(document).ready( function() {
     function fight() {
 
         enemyHealth = enemyHealth - heroAttack;
-        heroAttack = heroAttack + heroAttack;
+        heroAttack = heroAttack + characters[$('.hero').attr('id')].attack;
         checkDefeats();
         heroHealth = heroHealth - enemyAttack;
         loseCheck();
@@ -107,8 +113,7 @@ $(document).ready( function() {
     }
 
     //Start Game
-    displayValue();
-    //data();
+    initialDisplayValue();
 
     //when a character is selected, it moves to the 'your character div'
     $(document).on('click', '.character', function(event){
@@ -121,6 +126,7 @@ $(document).ready( function() {
         $('.character').addClass('enemy');
         $('.character').removeClass('character');
         $('#select-character').css('display','none');
+        heroSetUp();
 
     })
 
