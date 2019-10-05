@@ -1,9 +1,7 @@
 //To Do:
 //display none- other elements, until characters are selected.
-//change innerHTML to show 'select an opponent', but only when you have no current opponent.
 //css background for characters in different areas!!!
 
-//BUG - need to not lose health if your opponent is defeated by your attack
 //Fix - balance so any charaacter can win or lose, but each are different
 
 //fix how defeated characters are handled so that I can reset and stats are displayed properly
@@ -61,9 +59,8 @@ $(document).ready( function() {
             
             $('#hero-attack').text('You have defeated ' + $('.fight').attr('name') + '!  Select another enemy!'); //fix says undefined!!!!!!
             $('#enemy-attack').text('');
-            $('.fight').detach('div'); //fix!!!!!!!!!!!!!!!!!
-            $('#select-character').append('.fight')
-            
+            let moveDiv = $('.fight').detach('div'); //fix!!!!!!!!!!!!!!!!!
+            moveDiv.appendTo('#select-character')
 
             //check if all enemies are dead (win)
             if ($('#defender').children('div').length == 0 &&
