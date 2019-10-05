@@ -9,7 +9,7 @@
 //loads js after html and css
 $(document).ready( function() {
 
-    //set each character and their stats to objects
+    //set each character and their stats to objects in an object
     let characters = {
         "grievous": {health: 200, attack: 11, counterAttack: 10},
         "windu": {health: 220, attack: 12, counterAttack: 10},
@@ -23,6 +23,8 @@ $(document).ready( function() {
     let heroAttack = 0;
     let enemyHealth;
     let enemyAttack;
+    let wins = 0;
+    let loses = 0;
     
     //not working until I can fix the fightSetup() function
     function initialDisplayValue() {
@@ -30,6 +32,8 @@ $(document).ready( function() {
         $('#windu-health').text(characters['windu'].health);
         $('#dooku-health').text(characters['dooku'].health);
         $('#yoda-health').text(characters['yoda'].health);
+        $('#wins').text(wins)
+        $('#loses').text(loses)
         
     }
 
@@ -54,6 +58,7 @@ $(document).ready( function() {
 
                 //you win sequence!!!!!!
                 alert('you win') //fix - win sequecne
+                wins++;
                 reset();
             }
 
@@ -67,6 +72,7 @@ $(document).ready( function() {
         if (heroHealth <= 0) {
             //you lose sequence
             alert('you lose') //fix - lose sequence
+            loses++;
             reset();
         }
     }
@@ -74,7 +80,7 @@ $(document).ready( function() {
     //reset values
     function reset (){
         initialDisplayValue();
-        alert('reset')
+        alert('reset');
     }
 
     

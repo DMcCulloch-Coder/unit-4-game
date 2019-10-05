@@ -71,3 +71,14 @@ img {
     padding: 5px; 
 
 }
+
+#scoreBox{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    flex-direction: column;
+    min-width: 0;
+    margin: 5px;
+    text-align: right;
+
+}
