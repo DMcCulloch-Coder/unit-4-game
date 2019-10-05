@@ -3,8 +3,7 @@
 //css background for characters in different areas!!!
 
 //Fix - balance so any charaacter can win or lose, but each are different
-
-//fix how defeated characters are handled so that I can reset and stats are displayed properly
+//Fix - lose, move and reset all divs to select character
 
 $(document).ready( function() {
 
@@ -47,10 +46,17 @@ $(document).ready( function() {
     //reset values
     function reset (){
         initialDisplayValue();
-        $('#select-character').css('display','block')
+        $('#select-character').css('display','block');
         $('#hero-attack').text('');
         $('#enemy-attack').text('');
-        alert('reset');
+        let moveDiv = $('.hero').detach('div');
+        moveDiv.appendTo('#select-character');
+        moveDiv.removeClass('hero');
+        let moveEnemyDivs = $('.enemy').detach('div');
+        moveEnemyDivs.appendTo('#select-character')
+        moveEnemyDivs.removeClass('enemy fight')
+        $('#select-character div').addClass('character')
+        alert('New Game!');
     }
 
     function checkDefeats () {
@@ -59,8 +65,9 @@ $(document).ready( function() {
             
             $('#hero-attack').text('You have defeated ' + $('.fight').attr('name') + '!  Select another enemy!'); //fix says undefined!!!!!!
             $('#enemy-attack').text('');
-            let moveDiv = $('.fight').detach('div'); //fix!!!!!!!!!!!!!!!!!
+            let moveDiv = $('.fight').detach('div');
             moveDiv.appendTo('#select-character')
+            moveDiv.removeClass('fight enemy')
 
             //check if all enemies are dead (win)
             if ($('#defender').children('div').length == 0 &&
