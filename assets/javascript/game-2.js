@@ -1,11 +1,10 @@
 //To Do:
 //display none- other elements, until characters are selected.
 //change innerHTML to show 'select an opponent', but only when you have no current opponent.
+//css background for characters in different areas!!!
 
 //BUG - need to not lose health if your opponent is defeated by your attack
 //Fix - balance so any charaacter can win or lose, but each are different
-
-//css background for characters in different areas!!!
 
 //fix how defeated characters are handled so that I can reset and stats are displayed properly
 
@@ -13,10 +12,10 @@ $(document).ready( function() {
 
     //set each character and their stats to objects in an object
     let characters = {
-        "grievous": {health: 100, attack: 11, counterAttack: 9},
-        "windu": {health: 120, attack: 12, counterAttack: 10},
-        "dooku": {health: 150, attack: 15, counterAttack: 20},
-        "yoda": {health: 180, attack: 16, counterAttack: 25},
+        "grievous": {health: 100, attack: 9, counterAttack: 20},
+        "windu": {health: 120, attack: 11, counterAttack: 5},
+        "dooku": {health: 150, attack: 13, counterAttack: 15},
+        "yoda": {health: 180, attack: 15, counterAttack: 25},
     
     }
    
@@ -62,7 +61,7 @@ $(document).ready( function() {
             
             $('#hero-attack').text('You have defeated ' + $('.fight').attr('name') + '!  Select another enemy!'); //fix says undefined!!!!!!
             $('#enemy-attack').text('');
-            $('.fight').detach('div');
+            $('.fight').detach('div'); //fix!!!!!!!!!!!!!!!!!
             $('#select-character').append('.fight')
             
 
@@ -111,10 +110,12 @@ $(document).ready( function() {
         enemyHealth = enemyHealth - heroAttack;
         heroAttack = heroAttack + characters[$('.hero').attr('id')].attack;
         checkDefeats();
-        heroHealth = heroHealth - enemyAttack;
-        loseCheck();
-        displayValue();
-
+        
+        if ($('#defender').children('div').length !== 0){ //fix - check if there is a defender
+            heroHealth = heroHealth - enemyAttack;
+            loseCheck();
+            displayValue();
+        }
     }
 
     //Start Game
@@ -143,6 +144,7 @@ $(document).ready( function() {
             $(this).addClass('fight')
             //sets up the fight stats
             fightSetUp();
+            $('#hero-attack').text('');
 
         } else {
             alert('Already in a fight!')
