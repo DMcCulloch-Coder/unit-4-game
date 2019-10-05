@@ -3,16 +3,15 @@
 //css background for characters in different areas!!!
 
 //Fix - balance so any charaacter can win or lose, but each are different
-//Fix - lose, move and reset all divs to select character
 
 $(document).ready( function() {
 
     //set each character and their stats to objects in an object
     let characters = {
-        "grievous": {health: 100, attack: 9, counterAttack: 20},
-        "windu": {health: 120, attack: 11, counterAttack: 5},
-        "dooku": {health: 150, attack: 13, counterAttack: 15},
-        "yoda": {health: 180, attack: 15, counterAttack: 25},
+        "grievous": {health: 110, attack: 8, counterAttack: 20},
+        "windu": {health: 140, attack: 11, counterAttack: 10},
+        "dooku": {health: 100, attack: 12, counterAttack: 15},
+        "yoda": {health: 90, attack: 13, counterAttack: 25},
     
     }
    
