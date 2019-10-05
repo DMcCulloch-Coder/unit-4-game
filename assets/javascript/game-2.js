@@ -1,8 +1,5 @@
 //To Do:
-//display none- other elements, until characters are selected.
 //css background for characters in different areas!!!
-
-//Fix - balance so any charaacter can win or lose, but each are different
 
 $(document).ready( function() {
 
@@ -31,6 +28,7 @@ $(document).ready( function() {
         $('#yoda-health').text(characters['yoda'].health);
         $('#wins').text(wins)
         $('#loses').text(loses)
+        $('.clean-display').css('display', 'none')
         
     }
 
@@ -62,7 +60,7 @@ $(document).ready( function() {
         //check if the enemy is dead (defeat)
         if (enemyHealth <= 0) {
             
-            $('#hero-attack').text('You have defeated ' + $('.fight').attr('name') + '!  Select another enemy!'); //fix says undefined!!!!!!
+            $('#hero-attack').text('You have defeated ' + $('.fight').attr('name') + '!  Select another enemy!'); 
             $('#enemy-attack').text('');
             let moveDiv = $('.fight').detach('div');
             moveDiv.appendTo('#select-character')
@@ -114,7 +112,7 @@ $(document).ready( function() {
         heroAttack = heroAttack + characters[$('.hero').attr('id')].attack;
         checkDefeats();
         
-        if ($('#defender').children('div').length !== 0){ //fix - check if there is a defender
+        if ($('#defender').children('div').length !== 0){
             heroHealth = heroHealth - enemyAttack;
             loseCheck();
             displayValue();
@@ -135,6 +133,7 @@ $(document).ready( function() {
         $('.character').addClass('enemy');
         $('.character').removeClass('character');
         $('#select-character').css('display','none');
+        $('.clean-display').css('display', 'block')
         heroSetUp();
 
     })
