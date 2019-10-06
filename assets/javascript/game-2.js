@@ -1,8 +1,7 @@
 
 $(document).ready( function() {
 
-    //global Variables
-    //set each character and their stats to objects in an object
+    //Set global Variables
     let characters = {
         "grievous": {health: 110, attack: 8, counterAttack: 20},
         "windu": {health: 140, attack: 11, counterAttack: 10},
@@ -18,7 +17,7 @@ $(document).ready( function() {
     let wins = 0;
     let loses = 0;
     
-    //define functions
+    //Define Functions
     function initialDisplayValue() {
         $('#grievous-health').text(characters['grievous'].health);
         $('#windu-health').text(characters['windu'].health);
