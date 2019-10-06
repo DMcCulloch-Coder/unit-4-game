@@ -1,8 +1,7 @@
-//To Do:
-//css background for characters in different areas!!!
 
 $(document).ready( function() {
 
+    //global Variables
     //set each character and their stats to objects in an object
     let characters = {
         "grievous": {health: 110, attack: 8, counterAttack: 20},
@@ -12,7 +11,6 @@ $(document).ready( function() {
     
     }
    
-    //define functions
     let heroHealth = 0;
     let heroAttack = 0;
     let enemyHealth;
@@ -20,7 +18,7 @@ $(document).ready( function() {
     let wins = 0;
     let loses = 0;
     
-    //not working until I can fix the fightSetup() function
+    //define functions
     function initialDisplayValue() {
         $('#grievous-health').text(characters['grievous'].health);
         $('#windu-health').text(characters['windu'].health);
@@ -29,14 +27,13 @@ $(document).ready( function() {
         $('#wins').text(wins)
         $('#loses').text(loses)
         $('.clean-display').css('display', 'none')
-        
+
     }
 
     //dynamically change health during fight
     function displayValue () {
         $('#your-character span').text(heroHealth)
         $('#defender span').text(enemyHealth)
-        console.log('running')
 
     }
 
@@ -53,7 +50,7 @@ $(document).ready( function() {
         moveEnemyDivs.appendTo('#select-character')
         moveEnemyDivs.removeClass('enemy fight')
         $('#select-character div').addClass('character')
-        alert('New Game!');
+
     }
 
     function checkDefeats () {
@@ -119,7 +116,7 @@ $(document).ready( function() {
         }
     }
 
-    //Start Game
+    //Start Game - calling functions and on click events
     initialDisplayValue();
 
     //when a character is selected, it moves to the 'your character div'
@@ -135,6 +132,7 @@ $(document).ready( function() {
         $('#select-character').css('display','none');
         $('.clean-display').css('display', 'block')
         heroSetUp();
+        $('#hero-attack').text('Select an Opponent!');
 
     })
 
